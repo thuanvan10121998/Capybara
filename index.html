@@ -19,9 +19,9 @@
 </head>
 
 <body>
-    <audio id="myAudio" autoplay muted>
+    <audio autoplay loop id="playAudio">
         <source src="music/DuChoTanThe.mp3" type="audio/mp3">
-    </audio>
+      </audio>
     <div id="main">
         <div id="error">Trình duyệt của bạn không được hỗ trợ. Để được hỗ trợ liên hệ genzhoccode@gmail.com. Hoặc sử
             dụng (<a href="http://www.google.cn/chrome">Chrome</a>) và (<a
@@ -123,12 +123,14 @@
                     canvas.unbind("mousemove");
                     canvas.removeClass('hand');
                 }
+                playMusic();
             }).mousemove(function (e) {
                 var offset = canvas.offset(), x, y;
                 x = e.pageX - offset.left;
                 y = e.pageY - offset.top;
                 canvas.toggleClass('hand', seed.hover(x, y));
             });
+
 
             var seedAnimate = eval(Jscex.compile("async", function () {
                 seed.draw();
@@ -207,11 +209,17 @@
 
             runAsync().start();
         })();
-        setTimeout(() => {
-        let audio = document.getElementById("myAudio");
-        audio.muted = false;  // Bật âm thanh sau khi tải trang
-        audio.play().catch(error => console.log("Autoplay bị chặn:", error));
-    }, 1000); // Delay 1s để trình duyệt không chặn
+    function playMusic(){
+      var myAudio = document.getElementById('playAudio');
+      if (myAudio.duration > 0 && !myAudio.paused) {
+          //Its playing...do your job
+
+      } else {
+        myAudio.play()
+        //Not playing...maybe paused, stopped or never played.
+
+      }
+    }
 
     </script>
     <div style="text-align:center;margin:50px 0; font:normal 14px/24px 'MicroSoft YaHei';">
