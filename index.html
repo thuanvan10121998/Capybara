@@ -19,8 +19,8 @@
 </head>
 
 <body>
-    <audio autoplay="autoplay">
-        <source src="music/DuChoTanThe.mp3" type="audio/mp3" />
+    <audio id="myAudio" autoplay muted>
+        <source src="music/DuChoTanThe.mp3" type="audio/mp3">
     </audio>
     <div id="main">
         <div id="error">Trình duyệt của bạn không được hỗ trợ. Để được hỗ trợ liên hệ genzhoccode@gmail.com. Hoặc sử
@@ -207,6 +207,12 @@
 
             runAsync().start();
         })();
+        setTimeout(() => {
+        let audio = document.getElementById("myAudio");
+        audio.muted = false;  // Bật âm thanh sau khi tải trang
+        audio.play().catch(error => console.log("Autoplay bị chặn:", error));
+    }, 1000); // Delay 1s để trình duyệt không chặn
+
     </script>
     <div style="text-align:center;margin:50px 0; font:normal 14px/24px 'MicroSoft YaHei';">
         <!-- <p>Contact: <a href="https://www.facebook.com/dai.vudangdai" target="_blank">dangdaiptit</a></p> -->
