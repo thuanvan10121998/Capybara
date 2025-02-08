@@ -18,10 +18,11 @@
 
 </head>
 
-<body>
-    <audio autoplay loop id="playAudio">
+<body onclick="playAudio()">
+    <audio id="myAudio" autoplay muted>
         <source src="music/DuChoTanThe.mp3" type="audio/mp3">
-      </audio>
+    </audio>
+</audio>
     <div id="main">
         <div id="error">Trình duyệt của bạn không được hỗ trợ. Để được hỗ trợ liên hệ genzhoccode@gmail.com. Hoặc sử
             dụng (<a href="http://www.google.cn/chrome">Chrome</a>) và (<a
@@ -57,6 +58,12 @@
     </div>
 
     <script>
+        function playAudio() {
+            let audio = document.getElementById("myAudio");
+            audio.muted = false;
+            audio.play().catch(error => console.log("Autoplay bị chặn:", error));
+            document.body.onclick = null; // Chỉ chạy một lần
+        }
     </script>
 
     <script>
@@ -123,14 +130,12 @@
                     canvas.unbind("mousemove");
                     canvas.removeClass('hand');
                 }
-                playMusic();
             }).mousemove(function (e) {
                 var offset = canvas.offset(), x, y;
                 x = e.pageX - offset.left;
                 y = e.pageY - offset.top;
                 canvas.toggleClass('hand', seed.hover(x, y));
             });
-
 
             var seedAnimate = eval(Jscex.compile("async", function () {
                 seed.draw();
@@ -209,17 +214,11 @@
 
             runAsync().start();
         })();
-    function playMusic(){
-      var myAudio = document.getElementById('playAudio');
-      if (myAudio.duration > 0 && !myAudio.paused) {
-          //Its playing...do your job
-
-      } else {
-        myAudio.play()
-        //Not playing...maybe paused, stopped or never played.
-
-      }
-    }
+        setTimeout(() => {
+        let audio = document.getElementById("myAudio");
+        audio.muted = false;  // Bật âm thanh sau khi tải trang
+        audio.play().catch(error => console.log("Autoplay bị chặn:", error));
+    }, 1000); // Delay 1s để trình duyệt không chặn
 
     </script>
     <div style="text-align:center;margin:50px 0; font:normal 14px/24px 'MicroSoft YaHei';">
