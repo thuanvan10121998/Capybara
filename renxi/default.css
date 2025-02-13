@@ -13,3 +13,13 @@ a {color:#000;font-size:14px;}
 .hand{cursor:pointer;}
 .say{margin-left:5px;}
 .space{margin-right:150px;}
+
+.image-container {
+    width: 200px;
+    height: 200px;
+    background-image: url('/image/ph3.jpg');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
